@@ -1,20 +1,25 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Platform, Text } from "react-native";
+import { Text, useWindowDimensions } from "react-native";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const CardOverview = () => {
-    const isWeb = Platform.OS === "web"
-  const cardWidth = isWeb ? "min-w-80" : "min-w-44";
+  const { width } = useWindowDimensions();
+  const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
-    <LinearGradient
-      colors={["hsl(0 0% 10%)", "hsl(0 0% 0%)"]}
-      className={`h-32 ${cardWidth} rounded-2xl border-[hsl(0_0%_20%)] border border-t border-t-[hsl(0_0%_40%)] flex-1 justify-center px-7`}
-    >
-      <Text className="text-textMuted font-roboto pb-3">BITCOIN</Text>
-      <Text className="text-text text-3xl font-poppinsBold ">
-        $98769 <Text className="text-textMuted text-sm">≈78 BTC</Text>
+    <LinearGradient colors={["#2a2e32", "#212529"]} className="h-32 flex-auto min-w-[40%] justify-center px-7" style={{ borderRadius: 16 }}>
+      <Text className="text-textMuted font-roboto pb-1" style={{ fontSize: widthGreaterThan1000 ? 14 : RFPercentage(1.3) }}>
+        BITCOIN
       </Text>
-      <Text className="text-textMuted font-robotoLight">Across x accounts</Text>
+      <Text className="text-text font-poppinsBold" style={{ fontSize: widthGreaterThan1000 ? 24 : RFPercentage(2.3) }}>
+        $98769{" "}
+        <Text className="text-textMuted text-sm" style={{ fontSize: widthGreaterThan1000 ? 15 : RFPercentage(1) }}>
+          ≈78 BTC
+        </Text>
+      </Text>
+      <Text className="text-textMuted font-robotoLight" style={{ fontSize: widthGreaterThan1000 ? 13 : RFPercentage(1.4) }}>
+        Across x accounts
+      </Text>
     </LinearGradient>
   );
 };

@@ -3,6 +3,7 @@ import { Roboto_600SemiBold, Roboto_700Bold, Roboto_900Black } from "@expo-googl
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
+import { View } from "react-native";
 import "../global.css";
 
 SplashScreen.preventAutoHideAsync();
@@ -19,7 +20,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
-      console.log("fonts loaded!")
+      console.log("fonts loaded!");
     }
   }, [fontsLoaded]);
 
@@ -28,10 +29,12 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
+    <View className="flex-1">
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </View>
   );
 }

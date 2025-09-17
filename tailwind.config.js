@@ -11,8 +11,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgDark: "hsl(0 0% 0%)",
-        bgMedium: "hsl(0 0% 10%)",
+        bgDark: "hsl(220, 6%, 10%)",
+        bgMedium: "hsl(220, 4%, 13%)",
+        bgPrimary: "hsl(2, 99%, 62%)",
         text: "hsl(0 0% 95%)",
         textMuted: "hsl(0 0% 70%)"
       },
