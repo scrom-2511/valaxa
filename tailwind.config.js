@@ -17,8 +17,13 @@ module.exports = {
         textMuted: "hsl(0 0% 70%)"
       },
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-      }
+        roboto: ["RobotoRegular"],
+        robotoBold: ["RobotoBold"],
+        robotoLight: ["RobotoLight"],
+        poppins: ["PoppinsRegular"],
+        poppinsBold: ["PoppinsBold"],
+      },
+
     },
   },
   plugins: [],
