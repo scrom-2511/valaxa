@@ -4,7 +4,7 @@ import React from "react";
 import { Platform, Pressable, ScrollView, Text, TextInput, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ImportKey = () => {
+const ImportKeyOption = () => {
   const isWeb = Platform.OS === "web";
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
@@ -41,4 +41,4 @@ const ImportKey = () => {
   );
 };
 
-export default ImportKey;
+export default ImportKeyOption;

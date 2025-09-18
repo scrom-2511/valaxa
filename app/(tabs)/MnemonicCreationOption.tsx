@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Platform, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const MnemonicCreation = () => {
+const MnemonicCreationOption = () => {
   const isWeb = Platform.OS === "web";
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
@@ -50,4 +50,4 @@ const MnemonicCreation = () => {
   );
 };
 
-export default MnemonicCreation;
+export default MnemonicCreationOption;
