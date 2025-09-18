@@ -7,11 +7,11 @@ const AccountCreationOptions = ({ title, desc, onPress }: { title: string; desc:
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
-    <Pressable className="bg-bgMedium flex-auto w-full rounded-2xl justify-center px-10" onPress={onPress}>
+    <Pressable className="bg-bgMedium flex-auto w-full rounded-2xl justify-center" onPress={onPress}>
       <View className="flex-row items-center gap-5">
         {/* <Image></Image> */}
-        <View className="h-10 w-10 bg-text rounded-md"></View>
-        <View className="flex-col">
+        {/* <View className="h-10 w-10 bg-text rounded-md"></View> */}
+        <View className="flex-col px-10">
           <Text className="text-text font-robotoLight" style={{ fontSize: widthGreaterThan1000 ? 20 : RFPercentage(2.1) }}>
             {title}
           </Text>
