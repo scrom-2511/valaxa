@@ -16,8 +16,8 @@ const AccountCreation = () => {
           <Text className="text-teal-50 font-roboto text-2xl mb-5">HOW WOULD YOU LIKE TO CREATE AN ACCOUNT?</Text>
           <View className="flex-auto gap-5">
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" onPress={() => router.push("/(tabs)/MnemonicCreation")}/>
-            {/* <AccountCreationOptions title="Import Private Key" desc="Add a new single-chain account" onPress={() => router.push("/(tabs)/MnemonicImport")} />
-            <AccountCreationOptions title="Import From Mnemonic" desc="Import accounts from another wallet" />
+            <AccountCreationOptions title="Import Private Key" desc="Add a new single-chain account" onPress={() => router.push("/(tabs)/ImportKey")} />
+            {/* <AccountCreationOptions title="Import From Mnemonic" desc="Import accounts from another wallet" />
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" />
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" /> */}
           </View>

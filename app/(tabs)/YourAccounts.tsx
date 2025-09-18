@@ -1,4 +1,5 @@
 import CardOverview from "@/components/CardOverview";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Platform, Pressable, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { RFPercentage } from "react-native-responsive-fontsize";
@@ -8,6 +9,7 @@ const YourAccounts = () => {
   const isWeb = Platform.OS === "web";
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-bgDark">
       <ScrollView contentContainerClassName={isWeb ? "flex-1 items-center" : "items-strech"}>
@@ -23,7 +25,7 @@ const YourAccounts = () => {
             <View className="flex-row justify-between items-center">
               <Text className="text-text text-xl font-bold" style={{fontSize: widthGreaterThan1000 ? 15 : RFPercentage(1.5)}}>CONNECTED ACCOUNTS</Text>
               <Pressable className="bg-bgPrimary p-2 px-3 rounded-md">
-                <Text className="text-text font-roboto" style={{fontSize: widthGreaterThan1000 ? 13 : RFPercentage(1)}}>ADD ACCOUNT</Text>
+                <Text className="text-text font-roboto" style={{fontSize: widthGreaterThan1000 ? 13 : RFPercentage(1)}} onPress={()=>{router.push("/(tabs)/AccountCreation")}}>ADD ACCOUNT</Text>
               </Pressable>
             </View>
             <View className="bg-bgMedium flex-row h-32 w-full rounded-2xl items-center justify-between px-10">
