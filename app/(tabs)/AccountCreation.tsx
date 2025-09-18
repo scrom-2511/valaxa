@@ -1,4 +1,5 @@
 import AccountCreationOptions from "@/components/AccountCreationOptions";
+import { useRouter } from "expo-router";
 import React from "react";
 import { Platform, ScrollView, Text, useWindowDimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,17 +8,18 @@ const AccountCreation = () => {
   const isWeb = Platform.OS === "web";
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
+  const router = useRouter()
   return (
     <SafeAreaView className="flex-1 bg-bgDark">
       <ScrollView contentContainerClassName={isWeb ? "flex-1 items-center m-5" : "flex-1 items-strech m-5"}>
         <View className={isWeb ? "w-full max-w-[1000px] h-full px-5" : "flex-1"}>
           <Text className="text-teal-50 font-roboto text-2xl mb-5">HOW WOULD YOU LIKE TO CREATE AN ACCOUNT?</Text>
           <View className="flex-auto gap-5">
-            <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" />
-            <AccountCreationOptions title="Import Private Key" desc="Add a new single-chain account" />
+            <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" onPress={() => router.push("/(tabs)/MnemonicCreation")}/>
+            {/* <AccountCreationOptions title="Import Private Key" desc="Add a new single-chain account" onPress={() => router.push("/(tabs)/MnemonicImport")} />
             <AccountCreationOptions title="Import From Mnemonic" desc="Import accounts from another wallet" />
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" />
-            <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" />
+            <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" /> */}
           </View>
         </View>
       </ScrollView>

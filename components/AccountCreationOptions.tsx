@@ -1,13 +1,13 @@
 import React from "react";
-import { Platform, Text, useWindowDimensions, View } from "react-native";
+import { Platform, Pressable, Text, useWindowDimensions, View } from "react-native";
 import { RFPercentage } from "react-native-responsive-fontsize";
 
-const AccountCreationOptions = ({ title, desc }: { title: string; desc: string }) => {
+const AccountCreationOptions = ({ title, desc, onPress }: { title: string; desc: string, onPress: () => void }) => {
   const isWeb = Platform.OS === "web";
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
-    <View className="bg-bgMedium flex-auto w-full rounded-2xl justify-center px-10">
+    <Pressable className="bg-bgMedium flex-auto w-full rounded-2xl justify-center px-10" onPress={onPress}>
       <View className="flex-row items-center gap-5">
         {/* <Image></Image> */}
         <View className="h-10 w-10 bg-text rounded-md"></View>
@@ -20,7 +20,7 @@ const AccountCreationOptions = ({ title, desc }: { title: string; desc: string }
           </Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

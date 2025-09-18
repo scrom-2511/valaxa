@@ -1,4 +1,5 @@
 import OperationsCard from "@/components/OperationsCard";
+import { fontSize } from "@/utils/ElementSize";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { Image, Platform, ScrollView, Text, useWindowDimensions, View } from "react-native";
@@ -63,7 +64,7 @@ const Wallet = () => {
               <View className="flex-row items-center gap-5">
                 {/* <Image></Image> */}
                 <View className="h-10 w-10 bg-text rounded-md"></View>
-                <Text className="text-text text-lg" style={{ fontSize: widthGreaterThan1000 ? 18 : RFPercentage(1.6) }}>Token Name</Text>
+                <Text className="text-text text-lg" style={{ fontSize: widthGreaterThan1000 ? 18 : fontSize(widthGreaterThan1000, 1.6) }}>Token Name</Text>
               </View>
               <View>
                 <Image></Image>
