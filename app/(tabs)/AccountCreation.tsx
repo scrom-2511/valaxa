@@ -17,8 +17,8 @@ const AccountCreation = () => {
           <View className="flex-auto gap-5">
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" onPress={() => router.push("/(tabs)/MnemonicCreation")}/>
             <AccountCreationOptions title="Import Private Key" desc="Add a new single-chain account" onPress={() => router.push("/(tabs)/ImportKey")} />
+            <AccountCreationOptions title="Watch An Account" desc="Add a new account which you can watch but not sign any transactions." onPress={() => router.push("/(tabs)/WatchAccountOptionPage")}/>
             {/* <AccountCreationOptions title="Import From Mnemonic" desc="Import accounts from another wallet" />
-            <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" />
             <AccountCreationOptions title="Create New Account" desc="Add a new multi-chain account" /> */}
           </View>
         </View>
