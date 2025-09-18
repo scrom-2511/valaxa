@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       colors: {
         bgDark: "hsl(220, 6%, 10%)",
-        bgMedium: "hsl(220, 4%, 13%)",
+        bgMedium: "hsl(210, 11%, 15%)",
         bgPrimary: "hsl(2, 99%, 62%)",
         text: "hsl(0 0% 95%)",
         textMuted: "hsl(0 0% 70%)"
@@ -23,6 +23,7 @@ module.exports = {
         robotoLight: ["RobotoLight"],
         poppins: ["PoppinsRegular"],
         poppinsBold: ["PoppinsBold"],
+        poppinsSemiBold: ["PoppinsSemiBold"]
       },
 
     },

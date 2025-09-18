@@ -1,4 +1,4 @@
-import { Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Roboto_600SemiBold, Roboto_700Bold, Roboto_900Black } from "@expo-google-fonts/roboto";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
@@ -14,6 +14,7 @@ export default function RootLayout() {
     RobotoBold: Roboto_900Black,
     RobotoLight: Roboto_600SemiBold,
     PoppinsRegular: Poppins_400Regular,
+    PoppinsSemiBold: Poppins_600SemiBold,
     PoppinsBold: Poppins_700Bold,
   });
 
