@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "cryptPay",
-    "slug": "cryptPay",
+    "name": "valaxa",
+    "slug": "valaxa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "cryptpay",
+    "scheme": "valaxa",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

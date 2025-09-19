@@ -19,8 +19,8 @@ const Mnemonic = ({ input }: { input: boolean }) => {
     <SafeAreaView className="flex-1 bg-bgDark">
       <ScrollView contentContainerClassName={isWeb ? "flex-1 items-center" : "flex-1 items-strech"}>
         <View className={isWeb ? "w-full max-w-[1000px] h-full px-10 items-center py-44" : "flex-1 px-10 items-center justify-center my-64"}>
-          <Text className="text-text font-poppinsSemiBold text-3xl">Your Secret Phrase</Text>
-          <View className="flex-auto w-full p-10 gap-7" style={{alignItems: input ? "center" : undefined}}>
+          <Text className="text-text font-poppinsSemiBold text-3xl">{input ? "Enter Your Secret Phrase" : "Your Secret Phrase"}</Text>
+          <View className="flex-auto w-full p-10 gap-7" style={{ alignItems: input ? "center" : undefined }}>
             {Array.from({ length: 3 }).map((_, rowIndex) => (
               <View key={rowIndex} className="flex-1 flex-row gap-7">
                 {Array.from({ length: 3 }).map((_, colIndex) => {
@@ -46,16 +46,18 @@ const Mnemonic = ({ input }: { input: boolean }) => {
               </View>
             ))}
           </View>
-          <View className="flex-row mx-10 items-center gap-2 mb-5">
-            <Checkbox value={isChecked} onValueChange={setIsChecked} color={isChecked ? "hsl(0 0% 70%)" : "gray"} />
-            <Text className="text-textMuted font-poppins" style={{ fontSize: widthGreaterThan1000 ? 15 : fontSize(widthGreaterThan1000, 1.5) }}>
-              I saved the secret phrase with me and i understand that i should never share it with anyone.
-            </Text>
-          </View>
+          {!input && (
+            <View className="flex-row mx-10 items-center gap-2 mb-5">
+              <Checkbox value={isChecked} onValueChange={setIsChecked} color={isChecked ? "hsl(0 0% 70%)" : "gray"} />
+              <Text className="text-textMuted font-poppins" style={{ fontSize: widthGreaterThan1000 ? 15 : fontSize(widthGreaterThan1000, 1.5) }}>
+                I saved the secret phrase with me and i understand that i should never share it with anyone.
+              </Text>
+            </View>
+          )}
 
           <Pressable className="bg-bgPrimary p-2 px-3 rounded-md">
             <Text className="text-text font-roboto" style={{ fontSize: widthGreaterThan1000 ? 15 : fontSize(widthGreaterThan1000, 1.5) }}>
-              Let's Go!
+              {input ? "IMPORT ACCOUNT(S)" : "CREATE ACCOUNT"}
             </Text>
           </Pressable>
         </View>
