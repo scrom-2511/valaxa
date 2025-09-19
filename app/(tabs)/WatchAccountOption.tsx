@@ -1,11 +1,11 @@
-import Import_Watch from "@/components/Import_Watch";
+import SingleInput from "@/components/SingleInput";
 import { useRouter } from "expo-router";
 import React from "react";
 
 const WatchAccountOption = () => {
   const router = useRouter();
   return (
-    <Import_Watch title="Watch An Account" placeholder="Enter the public key:" buttonText="WATCH ACCOUNT" onPress={()=>{}}/>
+    <SingleInput title="Watch An Account" placeholder="Enter the public key:" buttonText="WATCH ACCOUNT" onPress={()=>{}}/>
   );
 };
 

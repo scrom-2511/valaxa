@@ -2,7 +2,7 @@ import { fontSize } from "@/utils/ElementSize";
 import React from "react";
 import { Pressable, Text, TextInput, useWindowDimensions, View } from "react-native";
 import InitializeComponent from "./InitializeComponent";
-const Import_Watch = ({
+const SingleInput = ({
   title,
   placeholder,
   buttonText,
@@ -16,7 +16,7 @@ const Import_Watch = ({
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
-    <InitializeComponent>
+    <InitializeComponent scrollable={false}>
       <View className="flex-col h-full justify-between">
         <View className="flex-col">
           <Text className="text-text font-poppinsSemiBold text-3xl my-5">{title}</Text>
@@ -40,4 +40,4 @@ const Import_Watch = ({
   );
 };
 
-export default Import_Watch;
+export default SingleInput;
