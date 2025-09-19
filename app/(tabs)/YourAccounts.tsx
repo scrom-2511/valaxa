@@ -24,7 +24,7 @@ const YourAccounts = () => {
           <View className="flex-col p-5 gap-5">
             <View className="flex-row justify-between items-center">
               <Text className="text-text text-xl font-bold" style={{fontSize: widthGreaterThan1000 ? 15 : RFPercentage(1.5)}}>CONNECTED ACCOUNTS</Text>
-              <Pressable className="bg-bgPrimary p-2 px-3 rounded-md">
+              <Pressable className="bg-bgPrimaryBtn p-2 px-3 rounded-md">
                 <Text className="text-text font-roboto" style={{fontSize: widthGreaterThan1000 ? 13 : RFPercentage(1)}} onPress={()=>{router.push("/(tabs)/AccountCreation")}}>ADD ACCOUNT</Text>
               </Pressable>
             </View>

@@ -30,7 +30,7 @@ const Import_Watch = ({
               <TextInput className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"></TextInput>
             </View>
             <View className="">
-              <Pressable className="bg-bgPrimary p-4 px-3 rounded-2xl flex items-center">
+              <Pressable className="bg-bgPrimaryBtn p-4 px-3 rounded-2xl flex items-center">
                 <Text
                   className="text-text font-roboto"
                   style={{ fontSize: widthGreaterThan1000 ? 18 : fontSize(widthGreaterThan1000, 2) }}

@@ -13,7 +13,8 @@ module.exports = {
       colors: {
         bgDark: "hsl(220, 6%, 10%)",
         bgMedium: "hsl(210, 11%, 15%)",
-        bgPrimary: "hsl(2, 99%, 62%)",
+        bgPrimaryBtn: "hsl(2, 99%, 62%)",
+        bgSecondaryBtn :"hsl(0, 0%, 50%)",
         text: "hsl(0 0% 95%)",
         textMuted: "hsl(0 0% 70%)"
       },
