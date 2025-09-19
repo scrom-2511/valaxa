@@ -1,10 +1,10 @@
-import Mnemonic from "@/components/Mnemonic";
+import MainMnemonic from "@/components/Mnemonic/MainMnemonic";
 import React from "react";
 
 const MnemonicCreationOption = () => {
 
   return (
-    <Mnemonic input={false}/>
+    <MainMnemonic input={false}/>
   );
 };
 

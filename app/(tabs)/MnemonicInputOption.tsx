@@ -1,9 +1,9 @@
-import Mnemonic from '@/components/Mnemonic'
+import MainMnemonic from '@/components/Mnemonic/MainMnemonic'
 import React from 'react'
 
 const MnemonicInputOption = () => {
   return (
-    <Mnemonic input={true}/>
+    <MainMnemonic input={true}/>
   )
 }
 
