@@ -12,7 +12,7 @@ const MainMnemonic = ({ input }: { input: boolean }) => {
   const mainClassName = isWeb ? "px-10 items-center py-44 flex-auto" : "px-10 items-center justify-center flex-auto my-64";
   const [isChecked, setIsChecked] = useState<boolean>(false);
   return (
-    <InitializeComponent>
+    <InitializeComponent scrollable= {false}>
       <View className={mainClassName}>
         <HeaderMnemonic input={input} />
         <GridMnemonic input={input} />

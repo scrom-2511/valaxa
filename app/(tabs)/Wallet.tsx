@@ -26,7 +26,7 @@ const Wallet = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-bgDark">
-      <ScrollView contentContainerClassName={isWeb ? "flex-1 items-center" : " items-strech"}>
+      <ScrollView contentContainerClassName={isWeb ? "flex-1 items-center" : "items-strech"}>
         <View className={isWeb ? "w-full max-w-[1000px] h-full px-10" : "flex-1 px-10"}>
           <Text className="text-text font-robotoBold mt-5" style={{ fontSize: widthGreaterThan1000 ? 24 : RFPercentage(2) }}>
             PORTFOLIO OVERVIEW
@@ -50,9 +50,9 @@ const Wallet = () => {
 
           {/* Operations Section */}
           <View className="flex-row pt-5 gap-5">
-            <OperationsCard xml={xml} rotate="-90deg" OperationNmae="SEND"/>
-            <OperationsCard xml={xml} rotate="90deg" OperationNmae="RECEIVE"/>
-            <OperationsCard xml={swapXml} OperationNmae="SWAP"/>
+            <OperationsCard xml={xml} rotate="-90deg" OperationNmae="SEND" />
+            <OperationsCard xml={xml} rotate="90deg" OperationNmae="RECEIVE" />
+            <OperationsCard xml={swapXml} OperationNmae="SWAP" />
           </View>
 
           {/* Tokens Section */}
@@ -64,7 +64,9 @@ const Wallet = () => {
               <View className="flex-row items-center gap-5">
                 {/* <Image></Image> */}
                 <View className="h-10 w-10 bg-text rounded-md"></View>
-                <Text className="text-text text-lg" style={{ fontSize: widthGreaterThan1000 ? 18 : fontSize(widthGreaterThan1000, 1.6) }}>Token Name</Text>
+                <Text className="text-text text-lg" style={{ fontSize: widthGreaterThan1000 ? 18 : fontSize(widthGreaterThan1000, 1.6) }}>
+                  Token Name
+                </Text>
               </View>
               <View>
                 <Image></Image>
