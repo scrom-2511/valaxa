@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import CardOverview from "../CardOverview";
+import CardOverview from "./CardOverview";
 
 const TopCardsYourAccounts = () => {
   return (

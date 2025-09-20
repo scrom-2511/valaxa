@@ -1,8 +1,9 @@
-import AccountCreationOptions from "@/components/AccountCreationOptions";
+
 import { useRouter } from "expo-router";
 import { FolderInput, Key, LucideView, Plus } from "lucide-react-native";
 import React from "react";
 import { View } from "react-native";
+import AccountCreationOptions from "./AccountCreationOptions";
 
 const AccountCreationOptionsList = () => {
   const router = useRouter();

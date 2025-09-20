@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import OperationsCard from "../OperationsCard";
+import OperationsCard from "./OperationsCard";
 
 const OperationsCardWallet = () => {
   const xml = `
