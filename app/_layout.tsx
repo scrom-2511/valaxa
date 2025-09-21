@@ -4,7 +4,11 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { View } from "react-native";
+import "react-native-get-random-values";
+import { install } from "react-native-quick-crypto";
 import "../global.css";
+
+install();
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,11 +35,11 @@ export default function RootLayout() {
 
   return (
     <View className="flex-1">
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
     </View>
   );
 }
