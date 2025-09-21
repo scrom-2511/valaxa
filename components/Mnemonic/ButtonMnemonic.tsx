@@ -1,10 +1,12 @@
 
+import { generateMnemonic } from "@/utils/Bip39";
 import React from "react";
 import { Pressable, Text } from "react-native";
 const ButtonMnemonic = ({ input, isChecked }: { input: boolean; isChecked: boolean }) => {
-  const handleOnClickCreateAccountBtn = () => {
+  const handleOnClickCreateAccountBtn =async () => {
     if (isChecked) {
-      
+      const mnemonic = generateMnemonic();
+      console.log(mnemonic)
     }
   };
   const bgBtnOnCreateAccount = isChecked ? "bg-bgPrimaryBtn" : "bg-bgSecondaryBtn";
