@@ -14,5 +14,5 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts"
-, "app/home/index.xts", "utils/_wordlists.js", "utils/Bip39.js"  ]
+, "app/home/index.xts", "utils/_wordlists.js", "utils/Bip39.js", "index.js"  ]
 }

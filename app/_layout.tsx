@@ -4,12 +4,8 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { View } from "react-native";
-import "react-native-get-random-values";
-import { install } from "react-native-quick-crypto";
 import "../global.css";
-
-install();
-
+import "../shim";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
