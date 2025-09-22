@@ -1,8 +1,9 @@
+import { TokenGenerator } from "@/interfaces/tokenGenerator.Interface";
 import { Keypair } from "@solana/web3.js";
 import { generateMnemonic, mnemonicToSeed } from "./Bip39";
 import { derivePath } from "./ed25519-hd-key";
 
-export const solanaWalletGenerator = async (mnemonic?: string) => {
+export const solanaWalletGenerator = async (mnemonic?: string): Promise<TokenGenerator> => {
   let mnemonicString = mnemonic || "";
   if (!mnemonic) {
     mnemonicString = generateMnemonic();
@@ -13,4 +14,5 @@ export const solanaWalletGenerator = async (mnemonic?: string) => {
   console.log(derivedSeed);
   const keypair = Keypair.fromSeed(derivedSeed);
   console.log(keypair.publicKey.toBase58());
+  return { privateKey: keypair.secretKey.toString(), publicKey: keypair.publicKey.toString() };
 };

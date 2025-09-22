@@ -11,6 +11,7 @@
     "lint": "expo lint"
   },
   "dependencies": {
+    "@bitcoinerlab/secp256k1": "^1.2.0",
     "@craftzdog/react-native-buffer": "^6.1.0",
     "@expo-google-fonts/poppins": "^0.4.0",
     "@expo-google-fonts/roboto": "^0.4.1",
@@ -20,7 +21,9 @@
     "@react-navigation/native": "^7.1.8",
     "@solana/web3.js": "^1.98.4",
     "babel-plugin-module-resolver": "^5.0.2",
+    "bip32": "^5.0.0-rc.0",
     "bip39": "^3.1.0",
+    "bitcoinjs-lib": "^6.1.7",
     "ethers": "^6.15.0",
     "expo": "~54.0.7",
     "expo-checkbox": "^5.0.7",
