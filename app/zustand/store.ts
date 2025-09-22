@@ -1,45 +1,55 @@
+import { TokenName } from "@/types/types";
 import { create } from "zustand";
-import { TokenName } from "../../types/types";
-export type Token = {
-  tokenName: TokenName;
-  tokenImage: string;
-  amount: number;
-  publicKey: number;
-};
 
-export type Wallet = {
-  walletName: string;
-  walletNumber: number;
-  tokens: Token[];
-};
 
-export type WalletStore = {
-  wallets: Wallet[];
-  addWallet: (newWallet: Wallet) => void;
-  setWallet: (tokens: Wallet[]) => void;
-};
+// export type Wallet = {
+//   walletName: string;
+//   walletNumber: number;
+//   tokens: Token[];
+// };
 
-export const useWalletStore = create<WalletStore>((set) => ({
-  wallets: [],
-  addWallet: (newWallet: Wallet) =>
-    set((state) => ({
-      wallets: [...state.wallets, newWallet],
-    })),
-  setWallet: (tokens: Wallet[]) =>
-    set(() => ({
-      wallets: tokens,
-    })),
-}));
+// export type WalletStore = {
+//   wallets: Wallet[];
+//   addWallet: (newWallet: Wallet) => void;
+//   setWallet: (tokens: Wallet[]) => void;
+// };
 
-export type Account = {
-  accountName: string;
-  accountNumer: number;
-};
-type AccountStore = {
-  accounts: Account[];
-  addAccount: (newAccount: Account) => void;
-  setAccount: (newAccounts: Account[]) => void;
-};
+// export const useWalletStore = create<WalletStore>((set) => ({
+//   wallets: [],
+//   addWallet: (newWallet: Wallet) =>
+//     set((state) => ({
+//       wallets: [...state.wallets, newWallet],
+//     })),
+//   setWallet: (tokens: Wallet[]) =>
+//     set(() => ({
+//       wallets: tokens,
+//     })),
+// }));
+
+  
+  export type Token<T extends TokenName> = {
+    tokenName: T;
+    tokenImage: string;
+    amount: number;
+    publicKey: string;
+  };
+  
+  export type TokenMap = {
+    [K in TokenName]: Token<K>;
+  };
+  
+  export type Account = {
+    accountName: string;
+    accountNumer: number;
+    tokens: TokenMap;
+  };
+  
+  export type AccountStore = {
+    accounts: Account[];
+    addAccount: (newAccount: Account) => void;
+    setAccount: (newAccounts: Account[]) => void;
+  };
+  
 
 export const useAccountStore = create<AccountStore>((set) => ({
   accounts: [],
