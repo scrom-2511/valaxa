@@ -13,6 +13,6 @@ export const solanaWalletGenerator = async (mnemonic?: string): Promise<TokenGen
   const derivedSeed = derivePath(path, seed.toString("hex")).key;
   console.log(derivedSeed);
   const keypair = Keypair.fromSeed(derivedSeed);
-  console.log(keypair.publicKey.toBase58());
+  // console.log(keypair.publicKey.toBase58());
   return { privateKey: keypair.secretKey.toString(), publicKey: keypair.publicKey.toString() };
 };

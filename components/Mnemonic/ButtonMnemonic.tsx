@@ -13,9 +13,18 @@ const ButtonMnemonic = ({ input, isChecked }: { input: boolean; isChecked: boole
   const handleOnClickCreateAccountBtn = async () => {
     if (isChecked) {
       const mnemonic = generateMnemonic();
-      const solanaWallet = solanaWalletGenerator(mnemonic);
-      const ethereumWallet = ethereumWalletGenerator(mnemonic);
-      const bitcoinWallet = bitcoinWalletGenerator(mnemonic);
+      const solanaWallet = await solanaWalletGenerator(mnemonic);
+      const ethereumWallet = await ethereumWalletGenerator(mnemonic);
+      const bitcoinWallet = await bitcoinWalletGenerator(mnemonic);
+      console.log("sol:")
+      console.log(solanaWallet)
+      console.log("eth:")
+      console.log(ethereumWallet)
+      console.log("btc:")
+      console.log(bitcoinWallet)
+
+      
+      
     }
   };
   const bgBtnOnCreateAccount = isChecked ? "bg-bgPrimaryBtn" : "bg-bgSecondaryBtn";

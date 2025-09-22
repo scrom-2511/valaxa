@@ -8,7 +8,7 @@ export const ethereumWalletGenerator = async (mnemonic?: string): Promise<TokenG
     mnemonicString = generateMnemonic();
   }
   const seed = await mnemonicToSeed(mnemonicString);
-  const derivationPath = `m/44'/60'/0'/0'`;
+  const derivationPath = `m/44'/60'/0'/0/0`;
   const hdNode = HDNodeWallet.fromSeed(seed);
   const child = hdNode.derivePath(derivationPath);
   const privateKey = child.privateKey;

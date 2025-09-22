@@ -1,48 +1,54 @@
 import { create } from "zustand";
-import { TokenName } from "../types";
-type Token = {
-    tokenName: TokenName;
-    tokenImage: string;
-    amount: number;
-    publicKey: number;
+import { TokenName } from "../../types/types";
+export type Token = {
+  tokenName: TokenName;
+  tokenImage: string;
+  amount: number;
+  publicKey: number;
 };
 
-type WalletStore = {
+export type Wallet = {
   walletName: string;
   walletNumber: number;
   tokens: Token[];
-  addToken: (newToken: Token) => void;
-  setToken: (tokens: Token[]) => void;
 };
 
-export const useWalletStore = create<WalletStore>((set)=>({
-    walletName: "",
-    walletNumber: -1,
-    tokens: [],
-    addToken: (newToken: Token) => set((state)=>({
-        tokens: [...state.tokens, newToken]
-    })),
-    setToken: (tokens: Token[]) => set(()=>({
-        tokens: tokens
-    }))
-}))
+export type WalletStore = {
+  wallets: Wallet[];
+  addWallet: (newWallet: Wallet) => void;
+  setWallet: (tokens: Wallet[]) => void;
+};
 
-type Account = {
-    accountName: string;
-    accountNumer: number;
-}
+export const useWalletStore = create<WalletStore>((set) => ({
+  wallets: [],
+  addWallet: (newWallet: Wallet) =>
+    set((state) => ({
+      wallets: [...state.wallets, newWallet],
+    })),
+  setWallet: (tokens: Wallet[]) =>
+    set(() => ({
+      wallets: tokens,
+    })),
+}));
+
+export type Account = {
+  accountName: string;
+  accountNumer: number;
+};
 type AccountStore = {
-    accounts: Account[];
-    addAccount: (newAccount: Account) => void;
-    setAccount: (newAccounts: Account[]) => void;
-}
+  accounts: Account[];
+  addAccount: (newAccount: Account) => void;
+  setAccount: (newAccounts: Account[]) => void;
+};
 
-export const useAccountStore = create<AccountStore>((set)=>({
-    accounts: [],
-    addAccount: (newAccount:Account) => set((state)=>({
-        accounts: [...state.accounts, newAccount]
+export const useAccountStore = create<AccountStore>((set) => ({
+  accounts: [],
+  addAccount: (newAccount: Account) =>
+    set((state) => ({
+      accounts: [...state.accounts, newAccount],
     })),
-    setAccount: (newAccounts: Account[]) => set(()=>({
-        accounts: newAccounts
-    }))
-}))
+  setAccount: (newAccounts: Account[]) =>
+    set(() => ({
+      accounts: newAccounts,
+    })),
+}));
