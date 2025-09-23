@@ -34,7 +34,7 @@ export type SingleToken<T extends TokenName> = {
 
 export type Account = {
   accountName: string;
-  accountNumer: number;
+  accountNumber: number;
   tokens: SingleToken<TokenName>[];
 };
 
