@@ -3,7 +3,7 @@ import { TokenName, WalletImgLocation } from "@/types/types";
 import { generateMnemonic } from "@/utils/Bip39";
 import { bitcoinWalletGenerator } from "@/utils/bitcoinWalletGenerator";
 import { ethereumWalletGenerator } from "@/utils/ethereumWalletGenerator";
-import { solanaWalletGenerator } from "@/utils/solanaWalletGenerator";
+import { solanaWalletGenerator } from "@/utils/solana/walletGeneratorSolana";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Account, SingleToken, useAccountStore, useSingleInputStore } from "../zustand/store";
@@ -45,18 +45,20 @@ const SetAccountName = () => {
       accountNumber: currentAccountIndex,
       tokens,
     };
-    addAccount(account, currentAccountIndex+1);
-    router.push(`/(tabs)/wallet/${0}`)
+    addAccount(account, currentAccountIndex + 1);
+    router.push(`/(tabs)/wallet/${0}`);
   };
 
-  useEffect(()=>{
-    console.log(accounts)
-  }, [accounts])
+  useEffect(() => {
+    console.log(accounts);
+  }, [accounts]);
   return (
     <SingleInput
       title="New Account Name"
       buttonText="ADD ACCOUNT"
-      onPress={() => {handleOnPress()}}
+      onPress={() => {
+        handleOnPress();
+      }}
       placeholder="Enter the account name"
       key="SetAccountName"
     />

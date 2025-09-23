@@ -1,13 +1,17 @@
+import { sendSolana } from "@/utils/solana/sendSolana";
 import React from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text } from "react-native";
 import { SvgXml } from "react-native-svg";
 
 const OperationsCard = ({ xml, rotate = "0deg", OperationNmae }: { xml: string; rotate?: string, OperationNmae: string }) => {
+  const handleOnPress = async () => {
+    const send = await sendSolana("", "", 9, "")
+  }
   return (
-    <View className="bg-bgMedium w-20 rounded-2xl flex-auto items-center justify-center p-5">
+    <Pressable className="bg-bgMedium w-20 rounded-2xl flex-auto items-center justify-center p-5" onPress={handleOnPress}>
       <SvgXml xml={xml} style={{ transform: [{ rotate: rotate }] }} />
       <Text className="text-textMuted font-poppinsSemiBold mt-2">{OperationNmae}</Text>
-    </View>
+    </Pressable>
   );
 };
 

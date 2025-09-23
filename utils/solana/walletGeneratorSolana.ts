@@ -1,7 +1,7 @@
 import { TokenGenerator } from "@/interfaces/tokenGenerator.Interface";
 import { Keypair } from "@solana/web3.js";
-import { generateMnemonic, mnemonicToSeed } from "./Bip39";
-import { derivePath } from "./ed25519-hd-key";
+import { generateMnemonic, mnemonicToSeed } from "../Bip39";
+import { derivePath } from "../ed25519-hd-key";
 
 export const solanaWalletGenerator = async (mnemonic?: string): Promise<TokenGenerator> => {
   let mnemonicString = mnemonic || generateMnemonic();
