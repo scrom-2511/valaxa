@@ -17,7 +17,7 @@ export type Account = {
 export type AccountStore = {
   accounts: Account[];
   currentAccountIndex: number;
-  addAccount: (newAccount: Account, accountIndex?: number) => void;
+  addAccount: (newAccount: Account, accountIndex: number) => void;
   setAccount: (newAccounts: Account[], accountIndex: number) => void;
 };
 
@@ -27,7 +27,7 @@ export const useAccountStore = create<AccountStore>((set) => ({
   addAccount: (newAccount, accountIndex?) =>
     set((state) => ({
       accounts: [...state.accounts, newAccount],
-      currentAccountIndex: accountIndex || state.currentAccountIndex + 1
+      currentAccountIndex: accountIndex
     })),
   setAccount: (newAccounts, accountIndex) =>
     set(() => ({
