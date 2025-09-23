@@ -1,3 +1,4 @@
+import { useSingleInputStore } from "@/app/zustand/store";
 import { fontSize } from "@/utils/ElementSize";
 import React from "react";
 import { Pressable, Text, TextInput, useWindowDimensions, View } from "react-native";
@@ -13,6 +14,7 @@ const SingleInput = ({
   buttonText: string;
   onPress: () => void;
 }) => {
+  const { currentInput, setCurrentInput } = useSingleInputStore();
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
@@ -22,7 +24,11 @@ const SingleInput = ({
           <Text className="text-text font-poppinsSemiBold text-3xl my-5">{title}</Text>
 
           <Text className="text-text font-poppins text-md my-4">{placeholder}</Text>
-          <TextInput className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"></TextInput>
+          <TextInput
+            className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"
+            value={currentInput}
+            onChangeText={setCurrentInput}
+          ></TextInput>
         </View>
         <View className="">
           <Pressable className="bg-bgPrimaryBtn p-4 px-3 rounded-2xl flex items-center">

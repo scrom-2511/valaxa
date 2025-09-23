@@ -6,11 +6,12 @@ import { ethereumWalletGenerator } from "@/utils/ethereumWalletGenerator";
 import { solanaWalletGenerator } from "@/utils/solanaWalletGenerator";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Account, SingleToken, useAccountStore } from "../zustand/store";
+import { Account, SingleToken, useAccountStore, useSingleInputStore } from "../zustand/store";
 
 const SetAccountName = () => {
   const router = useRouter();
   const { addAccount } = useAccountStore();
+  const { currentInput } = useSingleInputStore();
 
   const handleOnPress = async () => {
     const mnemonic = generateMnemonic();
@@ -40,8 +41,8 @@ const SetAccountName = () => {
     const tokens = [solanaToken, ethreumToken, bitcoinToken];
 
     const account: Account = {
-      accountName: "",
-      accountNumer: 0,
+      accountName: currentInput,
+      accountNumber: 0,
       tokens,
     };
     addAccount(account);

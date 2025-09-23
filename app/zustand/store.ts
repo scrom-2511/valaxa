@@ -1,30 +1,6 @@
 import { TokenName } from "@/types/types";
 import { create } from "zustand";
 
-// export type Wallet = {
-//   walletName: string;
-//   walletNumber: number;
-//   tokens: Token[];
-// };
-
-// export type WalletStore = {
-//   wallets: Wallet[];
-//   addWallet: (newWallet: Wallet) => void;
-//   setWallet: (tokens: Wallet[]) => void;
-// };
-
-// export const useWalletStore = create<WalletStore>((set) => ({
-//   wallets: [],
-//   addWallet: (newWallet: Wallet) =>
-//     set((state) => ({
-//       wallets: [...state.wallets, newWallet],
-//     })),
-//   setWallet: (tokens: Wallet[]) =>
-//     set(() => ({
-//       wallets: tokens,
-//     })),
-// }));
-
 export type SingleToken<T extends TokenName> = {
   tokenName: T;
   tokenImage: string;
@@ -55,3 +31,15 @@ export const useAccountStore = create<AccountStore>((set) => ({
       accounts: newAccounts,
     })),
 }));
+
+type SingleInputStore = {
+  currentInput: string
+  setCurrentInput: (input:string) => void;
+}
+
+export const useSingleInputStore = create<SingleInputStore>((set)=>({
+  currentInput:"",
+  setCurrentInput: (input)=> set((state)=>({
+    currentInput: input
+  }))
+}))
