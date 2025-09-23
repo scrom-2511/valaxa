@@ -46,7 +46,7 @@ const SetAccountName = () => {
       tokens,
     };
     addAccount(account);
-    router.push("/(tabs)/Wallet")
+    router.push(`/(tabs)/wallet/${0}`)
   };
 
   return (

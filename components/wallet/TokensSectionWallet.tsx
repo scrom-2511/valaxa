@@ -1,13 +1,15 @@
 import { useAccountStore } from "@/app/zustand/store";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
 const TokensSectionWallet = () => {
   const { accounts } = useAccountStore();
+  const { id } = useLocalSearchParams();
   return (
     <View className="flex-col">
       <Text className="text-text text-xl font-bold pt-10 mb-5">TOKENS</Text>
-      {accounts.map((account, index) => account.accountNumber === index && account.tokens.map((acc) => <EachToken tokenName={acc.tokenName} balance={acc.amount} key={acc.publicKey} />))}
+      {accounts.map((account, index) => account.accountNumber === Number(id) && account.tokens.map((acc) => <EachToken tokenName={acc.tokenName} balance={acc.amount} key={acc.publicKey} />))}
     </View>
   );
 };
