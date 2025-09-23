@@ -4,10 +4,7 @@ import { generateMnemonic, mnemonicToSeed } from "./Bip39";
 import { derivePath } from "./ed25519-hd-key";
 
 export const solanaWalletGenerator = async (mnemonic?: string): Promise<TokenGenerator> => {
-  let mnemonicString = mnemonic || "";
-  if (!mnemonic) {
-    mnemonicString = generateMnemonic();
-  }
+  let mnemonicString = mnemonic || generateMnemonic();
   const seed = await mnemonicToSeed(mnemonicString);
   const path = `m/44'/501'/0'/0'`;
   const derivedSeed = derivePath(path, seed.toString("hex")).key;

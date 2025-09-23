@@ -1,45 +1,51 @@
-import { Account, Token, useAccountStore } from "@/app/zustand/store";
+import { Account, SingleToken, useAccountStore } from "@/app/zustand/store";
 import { TokenName, WalletImgLocation } from "@/types/types";
 import { generateMnemonic } from "@/utils/Bip39";
 import { bitcoinWalletGenerator } from "@/utils/bitcoinWalletGenerator";
 import { ethereumWalletGenerator } from "@/utils/ethereumWalletGenerator";
 import { solanaWalletGenerator } from "@/utils/solanaWalletGenerator";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Pressable, Text } from "react-native";
 const ButtonMnemonic = ({ input, isChecked }: { input: boolean; isChecked: boolean }) => {
   const { accounts, addAccount } = useAccountStore();
+
+  useEffect(() => {
+    console.log(accounts);
+  }, [accounts]);
+  
   const handleOnClickCreateAccountBtn = async () => {
     if (isChecked) {
       const mnemonic = generateMnemonic();
       const solanaWallet = await solanaWalletGenerator(mnemonic);
       const ethereumWallet = await ethereumWalletGenerator(mnemonic);
       const bitcoinWallet = await bitcoinWalletGenerator(mnemonic);
-      console.log("sol:");
-      console.log(solanaWallet);
-      console.log("eth:");
-      console.log(ethereumWallet);
-      console.log("btc:");
-      console.log(bitcoinWallet);
 
-      const tokenSolana: Token<TokenName.solana> = { tokenName: TokenName.solana, tokenImage: WalletImgLocation.solana, amount: 10, publicKey: "" };
-      const tokenEthereum: Token<TokenName.ethereum> = {
+      const solanaToken: SingleToken<TokenName.solana> = {
+        tokenName: TokenName.solana,
+        tokenImage: WalletImgLocation.solana,
+        amount: 10,
+        publicKey: solanaWallet.publicKey,
+      };
+      const ethreumToken: SingleToken<TokenName.ethereum> = {
         tokenName: TokenName.ethereum,
         tokenImage: WalletImgLocation.ethereum,
         amount: 10,
-        publicKey: "",
+        publicKey: ethereumWallet.publicKey,
       };
-      const tokenBitcoin: Token<TokenName.bitcoin> = {
+      const bitcoinToken: SingleToken<TokenName.bitcoin> = {
         tokenName: TokenName.bitcoin,
         tokenImage: WalletImgLocation.bitcoin,
         amount: 10,
-        publicKey: "",
+        publicKey: bitcoinWallet.publicKey,
       };
+
+      const tokens = [solanaToken, ethreumToken, bitcoinToken];
 
       const account: Account = {
         accountName: "",
         accountNumer: 0,
-        tokens: { [TokenName.solana]: tokenSolana, [TokenName.ethereum]: tokenEthereum, [TokenName.bitcoin]: tokenBitcoin },
+        tokens,
       };
       addAccount(account);
     }
