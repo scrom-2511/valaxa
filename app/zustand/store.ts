@@ -47,3 +47,19 @@ export const useSingleInputStore = create<SingleInputStore>((set)=>({
     currentInput: input
   }))
 }))
+
+type SelectedAccountDetails = {
+  selectedAccountName: string | null,
+  selectedAccountNumber: number,
+  selectedToken: TokenName | null,
+  setSelectedAccountDetails: (selectedAccountName?: string, selectedAccountNumber?: number, selectedToken?: TokenName) => void
+}
+
+export const useSelectedAccountDetails = create<SelectedAccountDetails>((set)=>({
+  selectedAccountName: null,
+  selectedAccountNumber: -1,
+  selectedToken: null,
+  setSelectedAccountDetails: (selectedAccountName, selectedAccountNumber, selectedToken) => set(()=>({
+    selectedAccountName, selectedAccountNumber, selectedToken
+  }))
+}))
