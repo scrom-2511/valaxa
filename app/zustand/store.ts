@@ -52,7 +52,7 @@ type SelectedAccountDetails = {
   selectedAccountName: string | null,
   selectedAccountNumber: number,
   selectedToken: TokenName | null,
-  setSelectedAccountDetails: (selectedAccountName?: string, selectedAccountNumber?: number, selectedToken?: TokenName) => void
+  setSelectedAccountDetails: (selectedAccountName?: string | null, selectedAccountNumber?: number, selectedToken?: TokenName | null) => void
 }
 
 export const useSelectedAccountDetails = create<SelectedAccountDetails>((set)=>({
