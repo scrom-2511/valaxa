@@ -2,6 +2,7 @@ import { useSingleInputStore } from "@/app/zustand/store";
 import { fontSize } from "@/utils/ElementSize";
 import React from "react";
 import { Pressable, Text, TextInput, useWindowDimensions, View } from "react-native";
+import HeaderCommon from "./HeaderCommon";
 import InitializeComponent from "./InitializeComponent";
 const SingleInput = ({
   title,
@@ -21,9 +22,7 @@ const SingleInput = ({
     <InitializeComponent scrollable={false}>
       <View className="flex-col h-full justify-between">
         <View className="flex-col">
-          <Text className="text-text font-poppinsSemiBold text-3xl my-5">{title}</Text>
-
-          <Text className="text-text font-poppins text-md my-4">{placeholder}</Text>
+          <HeaderCommon title={title} placeholder= {placeholder}/>
           <TextInput
             className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"
             value={currentInput}

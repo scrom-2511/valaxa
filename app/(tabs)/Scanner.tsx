@@ -6,6 +6,10 @@ import { Button, Text, View } from 'react-native';
 const Scanner = () => {
   const [permission, requestPermission] = useCameraPermissions();
 
+  const handleOnBarcodeScan = () => {
+
+  }
+
   if (!permission) {
     // Camera permissions are still loading.
     return <View />;
@@ -24,7 +28,7 @@ const Scanner = () => {
   return (
     <InitializeComponent scrollable={false}>
         <Text>Camera component</Text>
-      <CameraView style={{flex: 1}} facing="back" />
+      <CameraView style={{flex:1}} facing="back" onBarcodeScanned={(e)=>{console.log(e)}} />
     </InitializeComponent>
   );
 

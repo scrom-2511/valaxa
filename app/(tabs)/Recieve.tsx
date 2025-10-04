@@ -4,7 +4,6 @@ import { TokenName } from "@/types/types";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
-import QRCode from "react-native-qrcode-svg";
 
 const Recieve = () => {
   const router = useRouter();
@@ -20,7 +19,6 @@ const Recieve = () => {
           <EachAccount accountName={TokenName.ethereum} onPress = {() =>{router.push(`/(tabs)/RecieveTokenInput`)}}/>
           <EachAccount accountName={TokenName.bitcoin} onPress = {() =>{router.push(`/(tabs)/RecieveTokenInput`)}}/>
         </View>
-      <QRCode value="www.google.com" color="red"></QRCode>
       </View>
     </InitializeComponent>
   );
