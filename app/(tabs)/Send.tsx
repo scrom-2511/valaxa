@@ -1,16 +1,18 @@
 import HeaderCommon from "@/components/HeaderCommon";
 import InitializeComponent from "@/components/InitializeComponent";
 import ListOptions from "@/components/ListOptions";
+import { useRouter } from "expo-router";
 import { ScanQrCode } from "lucide-react-native";
 import React from "react";
 
 const Send = () => {
+  const router = useRouter();
   const listOptions = [
     {
       title: "Scan QR Code",
-      desc: "Quickly scan a QR code to send tokens — no need to manually select a token or enter the amount.",
+      desc: "Quickly scan a QR code to send tokens, no need to manually select a token or enter the amount.",
       icon: ScanQrCode,
-      onPress: () => console.log("done"),
+      onPress: () => router.push("/(tabs)/Scanner"),
     },
     {
       title: "Send Using Public Key",
