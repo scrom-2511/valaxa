@@ -3,7 +3,7 @@ import { Platform, Pressable, Text, useWindowDimensions, View } from "react-nati
 import { RFPercentage } from "react-native-responsive-fontsize";
 
 
-const AccountCreationOptions = ({
+const ListOptions = ({
   title,
   desc,
   onPress,
@@ -18,7 +18,7 @@ const AccountCreationOptions = ({
   const { width } = useWindowDimensions();
   const widthGreaterThan1000 = width > 1000 ? true : false;
   return (
-    <Pressable className="bg-bgMedium flex-auto rounded-2xl justify-center px-8" onPress={onPress}>
+    <Pressable className="bg-bgMedium flex-row h-28 rounded-2xl justify-center px-8 mt-5" onPress={onPress}>
       <View className="flex-row items-center gap-5">
         <View className="flex-row gap-5 items-center">
         <Icon color="hsl(0, 0%, 95%)" size={35}></Icon>
@@ -36,4 +36,4 @@ const AccountCreationOptions = ({
   );
 };
 
-export default AccountCreationOptions;
+export default ListOptions;

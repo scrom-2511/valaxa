@@ -1,4 +1,4 @@
-import { useAccountStore } from "@/app/zustand/store";
+import { Account, useAccountStore, useSelectedAccountDetails } from "@/app/zustand/store";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -7,6 +7,12 @@ import { EachAccount } from "../EachAccount";
 const ConnectedAccountsYourAccounts = () => {
   const router = useRouter();
   const { accounts } = useAccountStore();
+  const { setSelectedAccountDetails } = useSelectedAccountDetails();
+  const handleOnClick = (account: Account) => {
+    setSelectedAccountDetails(account)
+    router.push(`/(tabs)/wallet/${account.accountNumber}`);
+  };
+  
   return (
     <View className="flex-col p-5 gap-5">
       <View className="flex-row justify-between items-center">
@@ -24,7 +30,7 @@ const ConnectedAccountsYourAccounts = () => {
       </View>
 
       {accounts.map((account) => (
-        <EachAccount accountName={account.accountName} key={account.accountNumber} onPress = {() =>{router.push(`/(tabs)/wallet/${account.accountNumber}`)}} />
+        <EachAccount accountName={account.accountName} key={account.accountNumber} onPress = {() => {handleOnClick(account)}} />
       ))}
     </View>
   );

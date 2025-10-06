@@ -1,8 +1,10 @@
+import { useRouter } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import OperationsCard from "./OperationsCard";
 
 const OperationsCardWallet = () => {
+  const router = useRouter();
   const xml = `
 <svg width="50px" height="50px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fe453e">
   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -15,11 +17,32 @@ const OperationsCardWallet = () => {
 `;
 
   const swapXml = `<svg width="45px" height="45px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#fe453e" stroke-width="0.0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 3.93a.75.75 0 0 1 1.177-.617l4.432 3.069a.75.75 0 0 1 0 1.233l-4.432 3.069A.75.75 0 0 1 16 10.067V8H4a1 1 0 0 1 0-2h12V3.93zm-9.177 9.383A.75.75 0 0 1 8 13.93V16h12a1 1 0 1 1 0 2H8v2.067a.75.75 0 0 1-1.177.617l-4.432-3.069a.75.75 0 0 1 0-1.233l4.432-3.069z" fill="#fe453e"></path></g></svg>`;
+
+  const operations = [
+    {
+      xml: xml,
+      rotate: "-90deg",
+      OperationNmae: "SEND",
+      onPress: () => router.push("/(tabs)/Send"),
+    },
+    {
+      xml: xml,
+      rotate: "90deg",
+      OperationNmae: "RECEIVE",
+      onPress: () => router.push("/(tabs)/Recieve"),
+    },
+    {
+      xml: swapXml,
+      OperationNmae: "SWAP",
+      onPress: () => router.push("/(tabs)/Swap"),
+    },
+  ];
+
   return (
     <View className="flex-row pt-5 gap-5">
-      <OperationsCard xml={xml} rotate="-90deg" OperationNmae="SEND" />
-      <OperationsCard xml={xml} rotate="90deg" OperationNmae="RECEIVE" />
-      <OperationsCard xml={swapXml} OperationNmae="SWAP" />
+      {operations.map((item, index) => (
+        <OperationsCard key={index} xml={item.xml} rotate={item.rotate} OperationNmae={item.OperationNmae} onPress={item.onPress} />
+      ))}
     </View>
   );
 };

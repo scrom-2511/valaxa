@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { FolderInput, Key, LucideView, Plus } from "lucide-react-native";
 import React from "react";
 import { View } from "react-native";
-import AccountCreationOptions from "./AccountCreationOptions";
+import ListOptions from "../ListOptions";
 
 const AccountCreationOptionsList = () => {
   const router = useRouter();
@@ -36,9 +36,9 @@ const AccountCreationOptionsList = () => {
   ];
 
   return (
-    <View className="flex-auto gap-5">
+    <View>
       {options.map((option, index) => (
-        <AccountCreationOptions
+        <ListOptions
           key={index}
           title={option.title}
           desc={option.desc}

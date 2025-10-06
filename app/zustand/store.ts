@@ -2,7 +2,7 @@ import { TokenName } from "@/types/types";
 import { create } from "zustand";
 
 export type SingleToken<T extends TokenName> = {
-  tokenName: T;
+  tokenName: T | null;
   tokenImage: string;
   amount: number;
   publicKey: string;
@@ -37,8 +37,8 @@ export const useAccountStore = create<AccountStore>((set) => ({
 }));
 
 type SingleInputStore = {
-  currentInput: string
-  setCurrentInput: (input:string) => void;
+  currentInput: string | null;
+  setCurrentInput: (input:string | null) => void;
 }
 
 export const useSingleInputStore = create<SingleInputStore>((set)=>({
@@ -49,17 +49,19 @@ export const useSingleInputStore = create<SingleInputStore>((set)=>({
 }))
 
 type SelectedAccountDetails = {
-  selectedAccountName: string | null,
-  selectedAccountNumber: number,
-  selectedToken: TokenName | null,
-  setSelectedAccountDetails: (selectedAccountName?: string | null, selectedAccountNumber?: number, selectedToken?: TokenName | null) => void
+  selectedAccount: Account
+  selectedToken: SingleToken<TokenName>
+  setSelectedAccountDetails: (account:Account) => void
+  setSelectedToken: (token: SingleToken<TokenName>) => void
 }
 
 export const useSelectedAccountDetails = create<SelectedAccountDetails>((set)=>({
-  selectedAccountName: null,
-  selectedAccountNumber: -1,
-  selectedToken: null,
-  setSelectedAccountDetails: (selectedAccountName, selectedAccountNumber, selectedToken) => set(()=>({
-    selectedAccountName, selectedAccountNumber, selectedToken
+  selectedAccount: {accountName:"", accountNumber: -1, tokens: [{amount: -1, publicKey: "", tokenImage:"", tokenName: null}]},
+  selectedToken: {amount: -1, publicKey: "", tokenImage:"", tokenName: null},
+  setSelectedAccountDetails: (account) => set(()=>({
+    selectedAccount: account
+  })),
+  setSelectedToken: (token) => set(()=>({
+    selectedToken: token
   }))
 }))
