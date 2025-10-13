@@ -10,7 +10,7 @@ const TokensSectionWallet = () => {
   return (
     <View className="flex-col">
       <Text className="text-text text-xl font-bold pt-10 mb-5">TOKENS</Text>
-      {accounts.map((account, index) => account.accountNumber === Number(id) && account.tokens.map((token) => <EachToken token={token} />))}
+      {accounts.map((account, index) => account.accountNumber === Number(id) && account.tokens.map((token) => <EachToken key={token.tokenName} token={token} />))}
     </View>
   );
 };

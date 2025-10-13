@@ -3,7 +3,7 @@ import InitializeComponent from "@/components/InitializeComponent";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Button, Text, View } from "react-native";
+import { Button, Pressable, Text, View } from "react-native";
 import { useSingleInputStore } from "../zustand/store";
 
 const Scanner = () => {
@@ -42,15 +42,17 @@ const Scanner = () => {
         style={{ flex: 1, marginVertical: 20 }}
         facing="back"
         onBarcodeScanned={(e) => {
-          console.log(e); // You may want to call handleOnBarcodeScanned here
+          console.log(e);
         }}
       />
 
       <View className="flex items-center mb-20">
         <Text className="text-text my-10">OR</Text>
+        <Pressable onPress={()=> router.push("/(tabs)/ManualSend")}>
         <Text className="text-text underline">
           I want to enter the public key manually
         </Text>
+        </Pressable>
       </View>
     </InitializeComponent>
   );

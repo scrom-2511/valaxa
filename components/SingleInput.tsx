@@ -22,7 +22,7 @@ const SingleInput = ({
     <InitializeComponent scrollable={false}>
       <View className="flex-col h-full justify-between">
         <View className="flex-col">
-          <HeaderCommon title={title} placeholder= {placeholder}/>
+          <HeaderCommon title={title} placeholder={placeholder} />
           <TextInput
             className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"
             value={currentInput}

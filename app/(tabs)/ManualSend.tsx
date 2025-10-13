@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import React from "react";
 import { Control, Controller, FieldErrors, useForm, useWatch } from "react-hook-form";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+import { DropdownComponent } from "../../components/Dropdown";
 
 type formFields = {
   to: string | null;
@@ -48,11 +48,11 @@ const TransactionDetails = ({ control }: { control: Control<formFields> }) => {
     control,
   });
   return (
-    <View>
-      <Text className="text-text font-poppinsSemiBold text-md mb-2 mt-5">Transaction Details</Text>
+    <View className="flex gap-5">
+      <Text className="text-text font-poppinsSemiBold text-md mb-2 mt-10">Transaction Details</Text>
       <EachDetail label="To:" value={to!} />
+      <EachDetail label="Token:" value={token!} />
       <EachDetail label="Total Amount:" value={totalAmount!} />
-      <EachDetail label="Token" value={token!} />
     </View>
   );
 };
@@ -99,67 +99,13 @@ const InputForm = ({ control, errors }: { control: Control<formFields>; errors: 
       <Controller
         control={control}
         rules={{
-          required: "Enter the amount you want to send.",
+          required: "Select the token you want to send.",
         }}
-        render={({ field: { onChange, onBlur, value } }) => <DropdownComponent onChange={onChange} onBlur={onBlur} value={value} />}
+        render={({ field: { onChange, onBlur, value } }) => <DropdownComponent placeholder="Select Token" onChange={onChange} onBlur={onBlur} value={value} />}
         name="token"
       />
       {errors.token && <Text>{errors.token.message}</Text>}
     </View>
-  );
-};
-
-const DropdownComponent = ({ onChange, onBlur, value }: { onChange: () => void; onBlur: () => void; value: string | null | undefined }) => {
-  const data = [
-    { label: "Item 1", value: "1" },
-    { label: "Item 2", value: "2" },
-    { label: "Item 3", value: "3" },
-    { label: "Item 4", value: "4" },
-    { label: "Item 5", value: "5" },
-    { label: "Item 6", value: "6" },
-    { label: "Item 7", value: "7" },
-    { label: "Item 8", value: "8" },
-  ];
-  return (
-    <Dropdown
-      data={data}
-      search
-      maxHeight={300}
-      labelField="label"
-      valueField="value"
-      searchPlaceholder="Search token..."
-      placeholder="Select token"
-      style={{
-        height: 54,
-        borderColor: "#ffffff",
-        borderWidth: 1,
-        borderRadius: 14,
-        paddingHorizontal: 20,
-      }}
-      placeholderStyle={{
-        color: "#9ca3af",
-      }}
-      selectedTextStyle={{
-        color: "#ffffff",
-      }}
-      inputSearchStyle={{
-        color: "#ffffff",
-        borderBottomColor: "#ffffff",
-        borderBottomWidth: 1,
-      }}
-      itemTextStyle={{
-        color: "#ffffff",
-      }}
-      containerStyle={{
-        backgroundColor: "hsl(220, 6%, 10%)",
-        borderRadius: 10,
-      }}
-      onChange={(item) => {
-        console.log(item);
-      }}
-      onBlur={onBlur}
-      value={value}
-    />
   );
 };
 
