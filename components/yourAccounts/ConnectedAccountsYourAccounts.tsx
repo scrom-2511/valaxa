@@ -1,4 +1,5 @@
 import { Account, useAccountStore, useSelectedAccountDetails } from "@/app/zustand/store";
+import { solanaConnection } from "@/reqHandlers/solanaConnectionProvider";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -6,9 +7,12 @@ import { EachAccount } from "../EachAccount";
 
 const ConnectedAccountsYourAccounts = () => {
   const router = useRouter();
-  const { accounts } = useAccountStore();
+  const { accounts, connWebSocket } = useAccountStore();
   const { setSelectedAccountDetails } = useSelectedAccountDetails();
   const handleOnClick = (account: Account) => {
+    account.tokens.forEach((token)=>(
+      connWebSocket(token.publicKey, solanaConnection)
+    ))
     setSelectedAccountDetails(account)
     router.push(`/(tabs)/wallet/${account.accountNumber}`);
   };
@@ -37,5 +41,3 @@ const ConnectedAccountsYourAccounts = () => {
 };
 
 export default ConnectedAccountsYourAccounts;
-
-
