@@ -1,7 +1,7 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { GetProgramAccountsFilter } from "@solana/web3.js";
 import { solanaConnection } from "./solanaConnectionProvider";
-export const getTokenAccounts = async (wallet: string) => {
+export const getTokenAccounts = async (solanaPublicKey: string) => {
   const filters: GetProgramAccountsFilter[] = [
     {
       dataSize: 165,
@@ -9,7 +9,7 @@ export const getTokenAccounts = async (wallet: string) => {
     {
       memcmp: {
         offset: 32,
-        bytes: wallet,
+        bytes: solanaPublicKey,
       },
     },
   ];
