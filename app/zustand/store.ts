@@ -1,57 +1,64 @@
 import { TokenName } from "@/types/types";
-import { Connection, PublicKey } from "@solana/web3.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-export type SingleToken<T extends TokenName> = {
-  tokenName: T | null;
+export type SingleToken = {
+  tokenName: TokenName | null | string;
   tokenImage: string;
   balance: number;
   publicKey: string;
+  mintAddress?: string;
+  isDerivedToken: boolean;
+  chain: TokenName | null ;
 };
 
 export type Account = {
   accountName: string;
   accountNumber: number;
-  tokens: SingleToken<TokenName>[];
+  tokens: SingleToken[];
 };
 
 export type AccountStore = {
   accounts: Account[];
   currentAccountIndex: number;
-  addAccount: (newAccount: Account, accountIndex: number) => void;
+  addAccount: (newAccount: Account) => void;
   setAccount: (newAccounts: Account[], accountIndex: number) => void;
-  updateBalance: (publicKey: string, balance: number) => void;
-  connWebSocket: (tokenPublicKey: string, connection: Connection) => void;
+  addTokens: (accountNumber: number, tokens: SingleToken[]) => void;
 };
 
-export const useAccountStore = create<AccountStore>((set, get) => ({
-  accounts: [],
-  currentAccountIndex: 0,
-  addAccount: (newAccount, accountIndex?) =>
-    set((state) => ({
-      accounts: [...state.accounts, newAccount],
-      currentAccountIndex: accountIndex,
-    })),
-  setAccount: (newAccounts, accountIndex) =>
-    set(() => ({
-      accounts: newAccounts,
-      currentAccountIndex: accountIndex,
-    })),
-  updateBalance: (publicKey, balance) =>
-    set((state) => ({
-      accounts: state.accounts.map((account) => ({
-        ...account,
-        tokens: account.tokens.map((token) => (token.publicKey === publicKey ? { ...token, balance } : token)),
-      })),
-    })),
-  connWebSocket: (tokenPubKey, connection) => {
-    const pubkey = new PublicKey(tokenPubKey);
-    connection.onAccountChange(pubkey, (accountInfo) => {
-      const balance = accountInfo.lamports / 1e9;
-      get().updateBalance(tokenPubKey, balance);
-    });
-  },
-}));
+export const useAccountStore = create<AccountStore>()(
+  persist(
+    (set, get) => ({
+      accounts: [],
+      currentAccountIndex: 0,
+      addAccount: (newAccount) =>
+        set((state) => ({
+          accounts: [...state.accounts, newAccount],
+          currentAccountIndex: state.currentAccountIndex + 1,
+        })),
+      setAccount: (newAccounts, accountIndex) =>
+        set(() => ({
+          accounts: newAccounts,
+          currentAccountIndex: accountIndex,
+        })),
+      addTokens: (accountNumber, tokens) =>
+        set((state) => ({
+          accounts: state.accounts.map((account) =>
+            account.accountNumber === accountNumber ? { ...account, tokens: [...account.tokens, ...tokens] } : account,
+          ),
+        })),
+    }),
+    {
+      name: "account-storage",
+      storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({
+        accounts: state.accounts,
+        currentAccountIndex: state.currentAccountIndex,
+      }),
+    },
+  ),
+);
 
 type SingleInputStore = {
   currentInput: string | null;
@@ -68,14 +75,15 @@ export const useSingleInputStore = create<SingleInputStore>((set) => ({
 
 type SelectedAccountDetails = {
   selectedAccount: Account;
-  selectedToken: SingleToken<TokenName>;
+  selectedToken: SingleToken;
   setSelectedAccountDetails: (account: Account) => void;
-  setSelectedToken: (token: SingleToken<TokenName>) => void;
+  setSelectedToken: (token: SingleToken) => void;
+  updateBalance: (publicKey: string, balance: number) => void;
 };
 
 export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) => ({
-  selectedAccount: { accountName: "", accountNumber: -1, tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null }] },
-  selectedToken: { balance: -1, publicKey: "", tokenImage: "", tokenName: null },
+  selectedAccount: { accountName: "", accountNumber: -1, tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null, mintAddress: "", chain: null, isDerivedToken:false }] },
+  selectedToken: { balance: -1, publicKey: "", tokenImage: "", tokenName: null, mintAddress: "", chain: null, isDerivedToken: false },
   setSelectedAccountDetails: (account) =>
     set(() => ({
       selectedAccount: account,
@@ -83,5 +91,12 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
   setSelectedToken: (token) =>
     set(() => ({
       selectedToken: token,
+    })),
+  updateBalance: (publicKey, balance) =>
+    set((state) => ({
+      selectedAccount: {
+        ...state.selectedAccount,
+        tokens: state.selectedAccount.tokens.map((token) => (token.publicKey === publicKey ? { ...token, balance } : token)),
+      },
     })),
 }));
