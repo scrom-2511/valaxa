@@ -25,7 +25,7 @@ const SingleInput = ({
           <HeaderCommon title={title} placeholder={placeholder} />
           <TextInput
             className="border-text border rounded-2xl h-20 text-text focus:outline-none p-5"
-            value={currentInput}
+            value={currentInput || ""}
             onChangeText={setCurrentInput}
           ></TextInput>
         </View>

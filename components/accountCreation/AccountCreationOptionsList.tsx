@@ -24,7 +24,7 @@ const AccountCreationOptionsList = () => {
     {
       title: "Watch An Account",
       desc: "Add a new account which you can watch but not sign any transactions.",
-      onPress: () => router.push("/(tabs)/WatchAccountOption"),
+      onPress: () => router.push("/(tabs)/SetAccountName?source=watchAccount"),
       icon: LucideView,
     },
     {

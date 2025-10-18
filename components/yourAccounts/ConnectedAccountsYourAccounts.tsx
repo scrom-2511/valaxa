@@ -1,22 +1,34 @@
+import { useSolanaSplTokens } from "@/app/hooks/useSolanaSplTokens";
 import { Account, useAccountStore, useSelectedAccountDetails } from "@/app/zustand/store";
-import { solanaConnection } from "@/reqHandlers/solanaConnectionProvider";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { EachAccount } from "../EachAccount";
 
 const ConnectedAccountsYourAccounts = () => {
   const router = useRouter();
-  const { accounts, connWebSocket } = useAccountStore();
-  const { setSelectedAccountDetails } = useSelectedAccountDetails();
+  const { accounts, addTokens } = useAccountStore();
+  const { selectedAccount, setSelectedAccountDetails } = useSelectedAccountDetails();
+  const [selectedPubKey, setSelectedPubKey] = useState<string | null>(null);
+  const { data: splTokensData } = useSolanaSplTokens(selectedPubKey || "");
   const handleOnClick = (account: Account) => {
-    account.tokens.forEach((token)=>(
-      connWebSocket(token.publicKey, solanaConnection)
-    ))
-    setSelectedAccountDetails(account)
+    // const solanaPubKey = account.tokens.find(
+    //   (token) => token.tokenName === TokenName.solana
+    // )?.publicKey;
+
+    // if (!solanaPubKey) return;
+
+    // setSelectedPubKey(solanaPubKey);
+    // if (splTokensData) {
+    //   addTokens(account.accountNumber, splTokensData);
+    // }
+    // account.tokens.forEach((token)=>(
+    //   connWebSocket(token.publicKey, solanaConnectionWs)
+    // ))
+    setSelectedAccountDetails(account);
     router.push(`/(tabs)/wallet/${account.accountNumber}`);
   };
-  
+
   return (
     <View className="flex-col p-5 gap-5">
       <View className="flex-row justify-between items-center">
@@ -34,7 +46,13 @@ const ConnectedAccountsYourAccounts = () => {
       </View>
 
       {accounts.map((account) => (
-        <EachAccount accountName={account.accountName} key={account.accountNumber} onPress = {() => {handleOnClick(account)}} />
+        <EachAccount
+          accountName={account.accountName}
+          key={account.accountNumber}
+          onPress={() => {
+            handleOnClick(account);
+          }}
+        />
       ))}
     </View>
   );
