@@ -4,54 +4,67 @@ import { generateMnemonic } from "@/utils/Bip39";
 import { bitcoinWalletGenerator } from "@/utils/bitcoinWalletGenerator";
 import { ethereumWalletGenerator } from "@/utils/ethereumWalletGenerator";
 import { solanaWalletGenerator } from "@/utils/solana/walletGeneratorSolana";
-import { useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import { router } from "expo-router";
+import { useSearchParams } from "expo-router/build/hooks";
+import React from "react";
 import { Account, SingleToken, useAccountStore, useSingleInputStore } from "../zustand/store";
 
 const SetAccountName = () => {
-  const router = useRouter();
   const { currentAccountIndex, accounts, addAccount } = useAccountStore();
   const { currentInput } = useSingleInputStore();
 
+  const searchParams = useSearchParams();
+  const source = searchParams.get("source");
   const handleOnPress = async () => {
-    const mnemonic = generateMnemonic();
-    const solanaWallet = await solanaWalletGenerator(mnemonic);
-    const ethereumWallet = await ethereumWalletGenerator(mnemonic);
-    const bitcoinWallet = await bitcoinWalletGenerator(mnemonic);
+    if (source === "watchAccount") {
+      console.log("pressed")
+      const account: Account = {
+        accountName: currentInput ?? "",
+        accountNumber: currentAccountIndex+1,
+        tokens: [],
+      };
+      addAccount(account);
+      router.push("/(tabs)/WatchAccountOption")
+    } else {
+      const mnemonic = generateMnemonic();
+      const solanaWallet = await solanaWalletGenerator(mnemonic);
+      const ethereumWallet = await ethereumWalletGenerator(mnemonic);
+      const bitcoinWallet = await bitcoinWalletGenerator(mnemonic);
 
-    const solanaToken: SingleToken<TokenName.solana> = {
-      tokenName: TokenName.solana,
-      tokenImage: WalletImgLocation.solana,
-      amount: 10,
-      publicKey: solanaWallet.publicKey,
-    };
-    const ethreumToken: SingleToken<TokenName.ethereum> = {
-      tokenName: TokenName.ethereum,
-      tokenImage: WalletImgLocation.ethereum,
-      amount: 10,
-      publicKey: ethereumWallet.publicKey,
-    };
-    const bitcoinToken: SingleToken<TokenName.bitcoin> = {
-      tokenName: TokenName.bitcoin,
-      tokenImage: WalletImgLocation.bitcoin,
-      amount: 10,
-      publicKey: bitcoinWallet.publicKey,
-    };
+      const solanaToken: SingleToken = {
+        tokenName: TokenName.solana,
+        tokenImage: WalletImgLocation.solana,
+        balance: 10,
+        publicKey: solanaWallet.publicKey,
+        mintAddress: "",
+      };
+      const ethreumToken: SingleToken = {
+        tokenName: TokenName.ethereum,
+        tokenImage: WalletImgLocation.ethereum,
+        balance: 10,
+        publicKey: ethereumWallet.publicKey,
+        mintAddress: "",
+      };
+      const bitcoinToken: SingleToken = {
+        tokenName: TokenName.bitcoin,
+        tokenImage: WalletImgLocation.bitcoin,
+        balance: 0,
+        publicKey: bitcoinWallet.publicKey,
+        mintAddress: "",
+      };
 
-    const tokens = [solanaToken, ethreumToken, bitcoinToken];
+      const tokens = [solanaToken, ethreumToken, bitcoinToken];
 
-    const account: Account = {
-      accountName: currentInput,
-      accountNumber: currentAccountIndex,
-      tokens,
-    };
-    addAccount(account, currentAccountIndex + 1);
-    router.push(`/(tabs)/wallet/${0}`);
+      const account: Account = {
+        accountName: currentInput ?? "",
+        accountNumber: currentAccountIndex,
+        tokens,
+      };
+      addAccount(account);
+      router.push(`/(tabs)/wallet/${0}`);
+    }
   };
 
-  useEffect(() => {
-    console.log(accounts);
-  }, [accounts]);
   return (
     <SingleInput
       title="New Account Name"
