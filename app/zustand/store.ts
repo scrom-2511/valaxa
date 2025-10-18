@@ -8,9 +8,10 @@ export type SingleToken = {
   tokenImage: string;
   balance: number;
   publicKey: string;
-  mintAddress?: string;
+  tokenAddress?: string;
   isDerivedToken: boolean;
-  chain: TokenName | null ;
+  chain: TokenName | null;
+  usdValue: number;
 };
 
 export type Account = {
@@ -79,11 +80,25 @@ type SelectedAccountDetails = {
   setSelectedAccountDetails: (account: Account) => void;
   setSelectedToken: (token: SingleToken) => void;
   updateBalance: (publicKey: string, balance: number) => void;
+  updateUsdValue: (publicKey: string, usdValue: number) => void;
 };
 
 export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) => ({
-  selectedAccount: { accountName: "", accountNumber: -1, tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null, mintAddress: "", chain: null, isDerivedToken:false }] },
-  selectedToken: { balance: -1, publicKey: "", tokenImage: "", tokenName: null, mintAddress: "", chain: null, isDerivedToken: false },
+  selectedAccount: {
+    accountName: "",
+    accountNumber: -1,
+    tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null, tokenAddress: "", chain: null, isDerivedToken: false, usdValue: -1 }],
+  },
+  selectedToken: {
+    balance: -1,
+    publicKey: "",
+    tokenImage: "",
+    tokenName: null,
+    tokenAddress: "",
+    chain: null,
+    isDerivedToken: false,
+    usdValue: -1,
+  },
   setSelectedAccountDetails: (account) =>
     set(() => ({
       selectedAccount: account,
@@ -97,6 +112,13 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
       selectedAccount: {
         ...state.selectedAccount,
         tokens: state.selectedAccount.tokens.map((token) => (token.publicKey === publicKey ? { ...token, balance } : token)),
+      },
+    })),
+  updateUsdValue: (publicKey, usdValue) =>
+    set((state) => ({
+      selectedAccount: {
+        ...state.selectedAccount,
+        tokens: state.selectedAccount.tokens.map((token) => (token.publicKey === publicKey ? { ...token, usdValue } : token)),
       },
     })),
 }));
