@@ -77,6 +77,7 @@ export const useSingleInputStore = create<SingleInputStore>((set) => ({
 type SelectedAccountDetails = {
   selectedAccount: Account;
   selectedToken: SingleToken;
+  totalUsdValue: number;
   setSelectedAccountDetails: (account: Account) => void;
   setSelectedToken: (token: SingleToken) => void;
   updateBalance: (publicKey: string, balance: number) => void;
@@ -99,6 +100,7 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
     isDerivedToken: false,
     usdValue: -1,
   },
+  totalUsdValue: -1,
   setSelectedAccountDetails: (account) =>
     set(() => ({
       selectedAccount: account,
@@ -108,17 +110,26 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
       selectedToken: token,
     })),
   updateBalance: (publicKey, balance) =>
-    set((state) => ({
-      selectedAccount: {
+    set((state) => {
+      const updatedAccount = {
         ...state.selectedAccount,
         tokens: state.selectedAccount.tokens.map((token) => (token.publicKey === publicKey ? { ...token, balance } : token)),
-      },
-    })),
+      };
+
+      const totalUsdValue = updatedAccount.tokens.reduce((sum, token) => sum + token.balance * token.usdValue, 0);
+
+      return { selectedAccount: updatedAccount, totalUsdValue };
+    }),
+
   updateUsdValue: (publicKey, usdValue) =>
-    set((state) => ({
-      selectedAccount: {
+    set((state) => {
+      const updatedAccount = {
         ...state.selectedAccount,
         tokens: state.selectedAccount.tokens.map((token) => (token.publicKey === publicKey ? { ...token, usdValue } : token)),
-      },
-    })),
+      };
+
+      const totalUsdValue = updatedAccount.tokens.reduce((sum, token) => sum + token.balance * token.usdValue, 0);
+
+      return { selectedAccount: updatedAccount, totalUsdValue };
+    }),
 }));

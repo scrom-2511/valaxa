@@ -19,7 +19,7 @@ const EachToken = ({ token }: { token: SingleToken }) => {
         <View className="h-10 w-10 bg-text rounded-md"></View>
         <View className="flex-col">
           <Text className="text-text text-lg">{token.tokenName}</Text>
-          <Text className="text-textMuted text-lg">{formatAmount(token.balance)}</Text>
+          <Text className="text-textMuted text-lg">{formatAmount(token.balance).replace("$", "")}</Text>
         </View>
       </View>
       <View>
