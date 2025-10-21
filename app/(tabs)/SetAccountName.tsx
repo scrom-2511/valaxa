@@ -1,5 +1,5 @@
 import SingleInput from "@/components/SingleInput";
-import { TokenName, WalletImgLocation } from "@/types/types";
+import { CoinAddress, TokenName, WalletImgLocation } from "@/types/types";
 import { generateMnemonic } from "@/utils/Bip39";
 import { bitcoinWalletGenerator } from "@/utils/bitcoinWalletGenerator";
 import { ethereumWalletGenerator } from "@/utils/ethereumWalletGenerator";
@@ -17,14 +17,14 @@ const SetAccountName = () => {
   const source = searchParams.get("source");
   const handleOnPress = async () => {
     if (source === "watchAccount") {
-      console.log("pressed")
+      console.log("pressed");
       const account: Account = {
         accountName: currentInput ?? "",
-        accountNumber: currentAccountIndex+1,
+        accountNumber: currentAccountIndex + 1,
         tokens: [],
       };
       addAccount(account);
-      router.push("/(tabs)/WatchAccountOption")
+      router.push("/(tabs)/WatchAccountOption");
     } else {
       const mnemonic = generateMnemonic();
       const solanaWallet = await solanaWalletGenerator(mnemonic);
@@ -36,21 +36,30 @@ const SetAccountName = () => {
         tokenImage: WalletImgLocation.solana,
         balance: 10,
         publicKey: solanaWallet.publicKey,
-        mintAddress: "",
+        tokenAddress: CoinAddress.solana,
+        isDerivedToken: false,
+        chain: TokenName.solana,
+        usdValue: -1,
       };
       const ethreumToken: SingleToken = {
         tokenName: TokenName.ethereum,
         tokenImage: WalletImgLocation.ethereum,
         balance: 10,
         publicKey: ethereumWallet.publicKey,
-        mintAddress: "",
+        tokenAddress: CoinAddress.ethereum,
+        isDerivedToken: false,
+        chain: TokenName.ethereum,
+        usdValue: -1,
       };
       const bitcoinToken: SingleToken = {
         tokenName: TokenName.bitcoin,
         tokenImage: WalletImgLocation.bitcoin,
         balance: 0,
         publicKey: bitcoinWallet.publicKey,
-        mintAddress: "",
+        tokenAddress: CoinAddress.bitcoin,
+        isDerivedToken: false,
+        chain: TokenName.bitcoin,
+        usdValue: -1,
       };
 
       const tokens = [solanaToken, ethreumToken, bitcoinToken];

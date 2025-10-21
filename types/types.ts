@@ -10,6 +10,12 @@ export enum WalletImgLocation {
   bitcoin = "/images/bitcoin-logo.png",
 }
 
+export enum CoinAddress {
+  solana = "11111111111111111111111111111111",
+  ethereum = "0x0000000000000000000000000000000000000000",
+  bitcoin = "bitcoin"
+}
+
 export type lifiToken = {
   chainId?: number;
   address?: string;

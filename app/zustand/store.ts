@@ -8,10 +8,11 @@ export type SingleToken = {
   tokenImage: string;
   balance: number;
   publicKey: string;
-  tokenAddress?: string;
+  tokenAddress: string;
   isDerivedToken: boolean;
   chain: TokenName | null;
   usdValue: number;
+  symbol: string | null;
 };
 
 export type Account = {
@@ -88,7 +89,7 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
   selectedAccount: {
     accountName: "",
     accountNumber: -1,
-    tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null, tokenAddress: "", chain: null, isDerivedToken: false, usdValue: -1 }],
+    tokens: [{ balance: -1, publicKey: "", tokenImage: "", tokenName: null, tokenAddress: "", chain: null, isDerivedToken: false, usdValue: -1, symbol: null }],
   },
   selectedToken: {
     balance: -1,
@@ -99,6 +100,7 @@ export const useSelectedAccountDetails = create<SelectedAccountDetails>((set) =>
     chain: null,
     isDerivedToken: false,
     usdValue: -1,
+    symbol: null
   },
   totalUsdValue: -1,
   setSelectedAccountDetails: (account) =>
