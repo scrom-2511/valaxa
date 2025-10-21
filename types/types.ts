@@ -16,6 +16,12 @@ export enum CoinAddress {
   bitcoin = "bitcoin"
 }
 
+export enum CoinSymbol {
+  solana = "Sol",
+  ethereum = "Eth",
+  bitcoin = "Btc"
+}
+
 export type lifiToken = {
   chainId?: number;
   address?: string;
