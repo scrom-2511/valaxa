@@ -3,7 +3,7 @@ import { TokenName } from "@/types/types";
 import axios from "axios";
 export const getTokenAccounts = async (solanaPublicKey: string) => {
   const response = await axios.post(
-    'https://mainnet.helius-rpc.com/?api-key=9108538b-db95-4ca8-ae6b-5e086c6e4429',
+    'https://devnet.helius-rpc.com/?api-key=9108538b-db95-4ca8-ae6b-5e086c6e4429',
     {
       jsonrpc: '2.0',
       id: 'getSplTokens',

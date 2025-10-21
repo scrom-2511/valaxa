@@ -18,7 +18,7 @@ const AccountCreationOptionsList = () => {
     {
       title: "Import Private Key",
       desc: "Add a new single-chain account",
-      onPress: () => router.push("/(tabs)/ImportKeyOption"),
+      onPress: () => router.push("/(tabs)/SetAccountName?source=importKey"),
       icon: Key,
     },
     {

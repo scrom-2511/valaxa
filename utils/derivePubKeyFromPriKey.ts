@@ -3,20 +3,23 @@ import bs58 from "bs58";
 import { Wallet } from "ethers";
 
 export const derivePubKeyFromPriKey = (key: string) => {
-    if (key.startsWith("0x")){
-        deriveEthAddressFromPriKey(key);
-    } else{
-        deriveSolAddressFromPriKey(key)
-    }
-}
-
+  console.log("key is:", key)
+  if (!key) return;
+  let publicKey;
+  if (key.startsWith("0x")) {
+    publicKey = deriveEthAddressFromPriKey(key);
+  } else {
+    publicKey = deriveSolAddressFromPriKey(key);
+  }
+  return publicKey;
+};
 
 export function deriveSolAddressFromPriKey(key: string) {
   try {
     const secretKey = bs58.decode(key);
     const keypair = Keypair.fromSecretKey(secretKey);
     console.log(keypair.publicKey.toBase58());
-    return keypair;
+    return keypair.publicKey.toString();
   } catch (e) {
     console.error("Failed to derive Solana address:", e);
   }
@@ -24,13 +27,13 @@ export function deriveSolAddressFromPriKey(key: string) {
 
 export function deriveEthAddressFromPriKey(privateKey: string) {
   try {
-    if (!privateKey.startsWith('0x')) {
-      privateKey = '0x' + privateKey;
+    if (!privateKey.startsWith("0x")) {
+      privateKey = "0x" + privateKey;
     }
 
     const wallet = new Wallet(privateKey);
     console.log(wallet.address);
-    return wallet;
+    return wallet.address.toString();
   } catch (e) {
     console.error("Failed to derive Ethereum address:", e);
   }
